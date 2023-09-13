@@ -1,0 +1,27 @@
+1. Creacion de archivo ASP.NET Core Web API
+2.vamos a instalar Microsoft.EntityFramework y Pomelo.Microsoft.EntityFramework.Mysql
+3.Creamos el modelo de nuestra DB
+4. Creamos el DbContext que es el que nos ayuda a utiizar Linq o Cualquier QUERY.
+   4.1 El dbContext lleva una interfaz que se tiene que poner con el valor (:) 
+    Ejemplo seria este: 
+    public class AppDbContext : DbContext
+    {
+
+        public AppDbContext(DbContextOptions options) : base(options) { }
+
+        public DbSet<User> Users { get; set; }
+
+    }
+
+5.Creamos en Program.cs
+
+var connectString = builder.Configuration.GetConnectionString("DefaultConnectStrl");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseMySql(connectString,ServerVersion.AutoDetect(connectString)));
+
+El [DefaultConnectStrl] seria la cadena que creamos con JSON en appsetting.json
+
+6.add-Migration "Initial migration" con esto tendremos siempre actualizo nuestra tablas
+
+
+
+
